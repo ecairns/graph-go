@@ -1,0 +1,56 @@
+DROP TABLE IF EXISTS graph_edge;
+DROP TABLE IF EXISTS graph_node;
+DROP TABLE IF EXISTS edge;
+DROP TABLE IF EXISTS node;
+DROP TABLE IF EXISTS graph;
+
+/* Store for graph */
+CREATE TABLE graph
+(
+    id  varchar(255)  NOT NULL,
+    name  varchar(255),
+    CONSTRAINT graph_pkey PRIMARY KEY (id)
+);
+
+/* Store for node */
+CREATE TABLE node
+(
+    id  varchar(255)  NOT NULL,
+    name  varchar(255),
+    CONSTRAINT node_pkey PRIMARY KEY (id)
+);
+
+/*
+	Store for edge
+	from_node & to_node Foreign keys of node table, and will DELETE records if key is deleted
+*/
+CREATE TABLE edge
+(
+	id varchar(255) NOT NULL,
+	from_node varchar(255) NOT NULL REFERENCES node (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	to_node varchar(255) NOT NULL REFERENCES node (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	cost float,
+	CONSTRAINT edge_pkey PRIMARY KEY (id)
+);
+
+/*
+	MANY-TO-MANY Relationships for nodes and graphs
+	Cascade delete if either graph or node record is deleted
+*/
+CREATE TABLE graph_node
+(
+	graph_id varchar(255) NOT NULL REFERENCES graph (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	node_id varchar(255) NOT NULL REFERENCES node (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	unique(graph_id, node_id)
+);
+
+/*
+	MANY-TO-MANY Relationships for edges and graphs
+	Cascade delete if either graph or edge record is deleted
+*/
+CREATE TABLE graph_edge
+(
+	graph_id varchar(255) NOT NULL REFERENCES graph (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	edge_id varchar(255) NOT NULL REFERENCES edge (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    unique(graph_id, edge_id)
+);

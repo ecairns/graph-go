@@ -1,0 +1,94 @@
+<graph>
+    <id>g0</id>
+    <name>The Graph Name</name>
+    <nodes>
+        <node>
+            <id>a</id>
+            <name>A name</name>
+        </node>
+        <node>
+            <id>b</id>
+            <name>B name</name>
+        </node>
+        <node>
+            <id>c</id>
+            <name>C name</name>
+        </node>
+        <node>
+            <id>d</id>
+            <name>D name</name>
+        </node>
+        <node>
+            <id>e</id>
+            <name>E name</name>
+        </node>
+        <node>
+            <id>f</id>
+            <name>F name</name>
+        </node>
+        <node>
+            <id>g</id>
+            <name>G name</name>
+        </node>
+        <node>
+            <id>h</id>
+            <name>h name</name>
+        </node>
+    </nodes>
+    <edges>
+        <node>
+            <id>aa</id>
+            <from>a</from>
+            <to>a</to>
+            <cost>0.25</cost>
+        </node>
+        <node>
+            <id>ae</id>
+            <from>a</from>
+            <to>e</to>
+            <cost>42</cost>
+        </node>
+        <node>
+            <id>ab</id>
+            <from>a</from>
+            <to>b</to>
+            <cost>20.42</cost>
+        </node>
+        <node>
+            <id>ba</id>
+            <from>b</from>
+            <to>a</to>
+            <cost>230.42</cost>
+        </node>
+        <node>
+            <id>bd</id>
+            <from>b</from>
+            <to>d</to>
+            <cost>51.3</cost>
+        </node>
+        <node>
+            <id>bc</id>
+            <from>b</from>
+            <to>c</to>
+            <cost>33.5</cost>
+        </node>
+        <node>
+            <id>ac</id>
+            <from>a</from>
+            <to>c</to>
+            <cost>5</cost>
+        </node>
+        <node>
+            <id>eh</id>
+            <from>e</from>
+            <to>h</to>
+            <cost>5</cost>
+        </node>
+        <node>
+            <id>ce</id>
+            <from>c</from>
+            <to>e</to>
+            <cost>2.5</cost>
+        </node>
+    </edges>
+</graph>

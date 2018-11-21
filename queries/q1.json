@@ -1,0 +1,34 @@
+{
+  "queries": [
+    {
+      "type": "paths",
+      "start": "a",
+      "end": "e"
+    },
+    {
+      "type": "paths",
+      "start": "b",
+      "end": "d"
+    },
+    {
+      "type": "paths",
+      "start": "d",
+      "end": "h"
+    },
+    {
+      "type": "cheapest",
+      "start": "a",
+      "end": "e"
+    },
+    {
+      "type": "cheapest",
+      "start": "b",
+      "end": "d"
+    },
+    {
+      "type": "cheapest",
+      "start": "d",
+      "end": "h"
+    }
+  ]
+}
