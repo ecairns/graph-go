@@ -8,32 +8,42 @@ import (
 )
 
 func QueryUsage() {
-	fmt.Println("USAGE:\n\t[URL | LocalFile]\n\n")
+	fmt.Println("USAGE:\n\t[STDIN | LocalFile]\n\n")
 }
 func main() {
-	if len(os.Args) != 2 {
-		QueryUsage()
-	} else {
-		app.DbInit()
-		defer app.DbClose()
-		fileLoc := os.Args[1]
+	var fileLoc string
+	var queryStr []byte
 
-		if _, err := os.Stat(fileLoc); !os.IsNotExist(err) {
-			queryStr, err := ioutil.ReadFile(fileLoc)
-			if err != nil {
-				panic(err)
-			}
-			qr, err := app.ParseQueryRequest(queryStr)
-			if err != nil {
-				panic(err)
-			}
+	if len(os.Args) == 2 {
+		fileLoc = os.Args[1]
+	}
+	app.DbInit()
+	defer app.DbClose()
 
-			jsonString, err := app.Query(qr)
-			if err != nil {
-				fmt.Println(err)
-			}
+	stat, _ := os.Stdin.Stat()
+	if (stat.Mode() & os.ModeCharDevice) == 0 {
+		queryStr, _ = ioutil.ReadAll(os.Stdin)
 
-			fmt.Println(jsonString)
+	} else if _, err := os.Stat(fileLoc); !os.IsNotExist(err) {
+		queryStr, err = ioutil.ReadFile(fileLoc)
+		if err != nil {
+			panic(err)
 		}
+	} else {
+		QueryUsage()
+	}
+
+	if len(queryStr) > 0 {
+		qr, err := app.ParseQueryRequest(queryStr)
+		if err != nil {
+			panic(err)
+		}
+
+		jsonString, err := app.Query(qr)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		fmt.Println(jsonString)
 	}
 }
