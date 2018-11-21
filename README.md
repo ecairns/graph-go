@@ -14,3 +14,12 @@ To run you must have the [GO] configured on your box with access to a postgresql
 
 ## Load data
     go run import.go <URL | LOCALFILE>
+  
+  example:
+    go run import.go data/graph1.xml
+
+## Query data
+    go run query.go <LOCALFILE>
+ 
+  example:
+    go run query.go queries/q1.json
