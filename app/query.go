@@ -8,11 +8,11 @@ import (
 )
 
 type result struct {
-	Type string `json:"type"`
-	From string `json:"from"`
-	To string `json:"to"`
-	Path interface{} `json:"path"`
-	Score float32 `json:"score,omitempty"`
+	Type  string      `json:"type"`
+	From  string      `json:"from"`
+	To    string      `json:"to"`
+	Path  interface{} `json:"path"`
+	Score float32     `json:"score,omitempty"`
 }
 
 type resultSet struct {
@@ -29,13 +29,13 @@ func Query(qrs QueryRequests) (string, error) {
 			continue
 		}
 
-		rs.Answers = append(rs.Answers, r);
+		rs.Answers = append(rs.Answers, r)
 	}
 	jsonBytes, _ := json.MarshalIndent(rs, "", "  ")
 	return string(jsonBytes), nil
 }
 
-func execQuery(qr QueryRequest) (result, error){
+func execQuery(qr QueryRequest) (result, error) {
 	var result result
 	var query string
 	var params []interface{}
@@ -76,12 +76,12 @@ WITH RECURSIVE paths(to_node, path, total, already_visited, cycle_detected) AS(
 
 	result.From = qr.Start
 	result.To = qr.End
-	result.Type = qr.Type;
-	result.Path = false;
+	result.Type = qr.Type
+	result.Path = false
 
 	var Paths [][]string
 	for rows.Next() {
-		var path string;
+		var path string
 		var total float32
 
 		if err := rows.Scan(&path, &total); err != nil {
@@ -97,7 +97,7 @@ WITH RECURSIVE paths(to_node, path, total, already_visited, cycle_detected) AS(
 		}
 	}
 	if len(Paths) > 0 {
-		result.Path = Paths;
+		result.Path = Paths
 	}
 
 	return result, nil
