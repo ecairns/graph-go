@@ -4,9 +4,11 @@ Code created in [GO](https://golang.org) using [POSTGRESQL](https://www.postgres
 
 To run you must have the [GO] configured on your box with access to a postgresql server.
 
-## Install
-	go get github.com/lib/pq
+## Install & Configure
+    go get github.com/lib/pq
     go get github.com/BurntSushi/toml
+    cp config.toml-example config.toml
+    vi config.toml
 
 ## Configure
     Create user/database on postgres
