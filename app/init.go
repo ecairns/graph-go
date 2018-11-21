@@ -48,6 +48,5 @@ func DbInit() {
 }
 
 func DbClose() {
-	fmt.Println("***** CLOSING DB CONNECTION *****")
 	DB.Close()
 }
